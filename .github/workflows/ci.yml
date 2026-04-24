@@ -1,0 +1,39 @@
+name: User Service CI
+
+on:
+  push:
+    branches:
+      - Prod-Branch
+      - Dev-Branch
+    paths:
+      - 'user-service/**'
+  pull_request:
+    branches:
+      - Prod-Branch
+      - Dev-Branch
+    paths:
+      - 'user-service/**'
+
+jobs:
+  ci:
+    name: "User Service Pipeline"
+    uses: Harshitha3826/Reusable-template/.github/workflows/Common_CI.yml@main
+    with:
+      working_directory: "."
+      image_name: "user-service"
+      service-name: "user-service"
+      run_build: false
+      sonar_project_key: "user-service"
+      docker_context: "."
+      dockerfile_path: "Dockerfile"
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
