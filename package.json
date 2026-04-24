@@ -8,7 +8,7 @@
     "dev": "nodemon src/server.js"
   },
   "dependencies": {
-    "argon2": "^0.44.0",
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "cross-spawn": "^7.0.5",
     "dotenv": "^16.4.5",
