@@ -3,18 +3,18 @@ name: User Service CI
 on:
   push:
     branches:
-      - Prod-Branch
+      - main
       - Dev-Branch
     
   pull_request:
     branches:
-      - Prod-Branch
+      - main
       - Dev-Branch
     
 permissions:
   contents: write
   packages: write
-  
+
 jobs:
   ci:
     name: "User Service Pipeline"
