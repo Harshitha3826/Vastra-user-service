@@ -1,5 +1,3 @@
-# tar vulnerabilities are transitive via bcrypt's node-pre-gyp
-# Cannot be fixed without bcrypt removing this dependency
 CVE-2026-23745
 CVE-2026-23950
 CVE-2026-24842
