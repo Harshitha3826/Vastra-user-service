@@ -5,14 +5,12 @@ on:
     branches:
       - Prod-Branch
       - Dev-Branch
-    paths:
-      - 'user-service/**'
+    
   pull_request:
     branches:
       - Prod-Branch
       - Dev-Branch
-    paths:
-      - 'user-service/**'
+    
 
 jobs:
   ci:
