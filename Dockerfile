@@ -13,3 +13,6 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY . .
 EXPOSE 3001
 CMD ["node", "src/server.js"]
+
+# Install specific versions to mitigate vulnerabilities
+RUN npm install cross-spawn@7.0.5 glob@10.5.0 minimatch@9.0.7 --omit=dev && npm cache clean --force
