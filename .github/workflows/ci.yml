@@ -15,7 +15,7 @@ on:
 jobs:
   ci:
     name: "User Service Pipeline"
-    uses: Harshitha3826/Reusable-template/.github/workflows/.github/workflows/ci-template.yml@main
+    uses: Harshitha3826/Reusable-template/.github/workflows/ci-template.yml@main
     with:
       working_directory: "."
       image_name: "user-service"
