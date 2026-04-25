@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const UserModel = require('../models/userModel');
 
@@ -53,7 +53,7 @@ const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password_hash);
+    const isMatch = await argon2.verify(user.password_hash, password);
     if (!isMatch) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }

@@ -32,7 +32,7 @@ app.get('/ready', async (req, res) => {
     await pool.query('SELECT 1');
     res.status(200).json({ status: 'ready', db: 'connected' });
   } catch (err) {
-    console.error('Database readiness check failed:', err.message);
+    // Database readiness check failed
     res.status(503).json({ status: 'not ready', db: 'disconnected' });
   }
 });
