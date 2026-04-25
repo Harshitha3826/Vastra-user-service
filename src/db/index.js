@@ -1,17 +1,17 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  host: process.env.USER_DB_HOST || 'localhost',
-  port: process.env.USER_DB_PORT || 5432,
-  database: process.env.USER_DB_NAME || 'users_db',
-  user: process.env.USER_DB_USER || 'vastraco_user',
-  password: process.env.USER_DB_PASSWORD || 'users_pass_123',
+  host: process.env.USER_DB_HOST,
+  port: process.env.USER_DB_PORT,
+  database: process.env.USER_DB_NAME,
+  user: process.env.USER_DB_USER,
+  password: process.env.USER_DB_PASSWORD,
 });
 
 const initDb = async () => {
   const client = await pool.connect();
   try {
-    console.log('Connected to User DB, initializing tables...');
+    // Connected to User DB, initializing tables...
     
     await client.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -24,9 +24,9 @@ const initDb = async () => {
       );
     `);
     
-    console.log('User DB initialization complete.');
+    // User DB initialization complete.
   } catch (err) {
-    console.error('Error initializing User DB', err);
+    // Error initializing User DB
     process.exit(1);
   } finally {
     client.release();

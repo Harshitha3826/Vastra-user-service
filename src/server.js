@@ -7,7 +7,7 @@ const { initDb, pool } = require('./db');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 app.use(helmet());
 app.use(cors({ origin: ['http://localhost:3000', 'http://frontend:80'] }));
@@ -38,8 +38,8 @@ app.get('/ready', async (req, res) => {
 });
 
 // Global Error Handler
-app.use((error, _req, res, _next) => {
-  console.error('Global error:', error.message);
+app.use((err, req, res, next) => {
+  // Log error for monitoring
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
@@ -47,16 +47,16 @@ app.use((error, _req, res, _next) => {
 const startServer = async () => {
   await initDb();
   const server = app.listen(PORT, () => {
-    console.log(`User Service running on port ${PORT}`);
+    // User Service started successfully
   });
 
   // Graceful shutdown
   const shutdown = () => {
-    console.log('SIGTERM signal received: closing HTTP server');
+    // SIGTERM signal received: closing HTTP server
     server.close(() => {
-      console.log('HTTP server closed');
+      // HTTP server closed
       pool.end(() => {
-        console.log('Database connections closed');
+        // Database connections closed
         process.exit(0);
       });
     });

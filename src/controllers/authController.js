@@ -36,7 +36,7 @@ const register = async (req, res) => {
 
     res.status(201).json({ user, token });
   } catch (error) {
-    console.error('Register error:', error);
+    // Register error logged
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -64,7 +64,7 @@ const login = async (req, res) => {
 
     res.status(200).json({ user: userWithoutPassword, token });
   } catch (error) {
-    console.error('Login error:', error);
+    // Login error logged
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -77,7 +77,7 @@ const getMe = async (req, res) => {
     }
     res.status(200).json({ user });
   } catch (error) {
-    console.error('GetMe error:', error);
+    // GetMe error logged
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -92,7 +92,7 @@ const updateProfile = async (req, res) => {
     const user = await UserModel.updateProfile(req.user.id, name);
     res.status(200).json({ user });
   } catch (error) {
-    console.error('UpdateProfile error:', error);
+    // UpdateProfile error logged
     res.status(500).json({ error: 'Internal server error' });
   }
 };
