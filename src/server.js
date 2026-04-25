@@ -18,7 +18,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(helmet());
-app.use(cors({ origin: ['http://localhost:3000', 'http://frontend:80', '*'] }));
+app.use(cors({ origin: ['http://localhost:3000', 'http://frontend:80'] }));
 app.use(express.json());
 app.use(morgan('dev'));
 
@@ -40,6 +40,7 @@ app.get('/ready', async (req, res) => {
     await pool.query('SELECT 1');
     res.status(200).json({ status: 'ready', db: 'connected' });
   } catch (err) {
+    // Database readiness check failed
     res.status(503).json({ status: 'not ready', db: 'disconnected' });
   }
 });
