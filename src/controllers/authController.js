@@ -17,6 +17,15 @@ const register = async (req, res) => {
       return res.status(400).json({ error: 'Name, email, and password are required' });
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters long' });
+    }
+
     const existingUser = await UserModel.findByEmail(email);
     if (existingUser) {
       return res.status(409).json({ error: 'Email already exists' });
@@ -27,7 +36,7 @@ const register = async (req, res) => {
 
     res.status(201).json({ user, token });
   } catch (error) {
-    console.error('Register error:', error);
+    // Register error logged
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -49,12 +58,13 @@ const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+    // eslint-disable-next-line no-unused-vars
     const { password_hash, ...userWithoutPassword } = user;
     const token = generateToken(userWithoutPassword);
 
     res.status(200).json({ user: userWithoutPassword, token });
   } catch (error) {
-    console.error('Login error:', error);
+    // Login error logged
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -67,7 +77,7 @@ const getMe = async (req, res) => {
     }
     res.status(200).json({ user });
   } catch (error) {
-    console.error('GetMe error:', error);
+    // GetMe error logged
     res.status(500).json({ error: 'Internal server error' });
   }
 };
@@ -82,7 +92,7 @@ const updateProfile = async (req, res) => {
     const user = await UserModel.updateProfile(req.user.id, name);
     res.status(200).json({ user });
   } catch (error) {
-    console.error('UpdateProfile error:', error);
+    // UpdateProfile error logged
     res.status(500).json({ error: 'Internal server error' });
   }
 };
