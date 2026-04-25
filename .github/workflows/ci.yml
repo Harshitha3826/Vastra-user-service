@@ -3,32 +3,19 @@ name: User Service CI
 on:
   push:
     branches:
-<<<<<<< HEAD
-      - main
-      - develop
-    paths:
-      - '/user-service/**'
-  pull_request:
-    branches:
-      - main
-      - develop
-    paths:
-      - '/user-service/**'
-  workflow_dispatch:
-=======
       - Prod-Branch
       - Dev-Branch
     
   pull_request:
     branches:
-      - Prod-Branch
+      - main
       - Dev-Branch
     
 permissions:
   contents: write
   packages: write
   
->>>>>>> 97926289dca0196fd73cf2ac29141174d94da2c9
+
 jobs:
   ci:
     name: "User Service Pipeline"
