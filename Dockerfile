@@ -9,7 +9,7 @@ RUN apk add --no-cache python3 make g++
 COPY package*.json ./
 RUN npm install
 
-# Moved your vulnerability patches here so they are bundled into the builder node_modules
+# Moved your vulnerability patches here so they are bundled into the builder node_modules..
 RUN npm install cross-spawn@7.0.5 glob@10.5.0 minimatch@9.0.7 --omit=dev && \
     npm cache clean --force
 RUN (npm ci --omit=dev || npm install --omit=dev) && \
