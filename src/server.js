@@ -32,13 +32,14 @@ app.get('/ready', async (req, res) => {
     await pool.query('SELECT 1');
     res.status(200).json({ status: 'ready', db: 'connected' });
   } catch (err) {
+    console.error('Database readiness check failed:', err.message);
     res.status(503).json({ status: 'not ready', db: 'disconnected' });
   }
 });
 
 // Global Error Handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
+app.use((error, _req, res, _next) => {
+  console.error('Global error:', error.message);
   res.status(500).json({ error: 'Something went wrong!' });
 });
 

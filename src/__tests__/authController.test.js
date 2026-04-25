@@ -1,7 +1,6 @@
 const request = require('supertest');
 const express = require('express');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const authRoutes = require('../routes/authRoutes');
 
 // Mock the database
@@ -12,11 +11,9 @@ jest.mock('../db', () => ({
 jest.mock('../models/userModel', () => ({
   createUser: jest.fn(),
   findByEmail: jest.fn(),
-  findById: jest.fn(),
-  updateProfile: jest.fn(),
 }));
 
-const { createUser, findByEmail, findById, updateProfile } = require('../models/userModel');
+const { createUser, findByEmail } = require('../models/userModel');
 
 const app = express();
 app.use(express.json());

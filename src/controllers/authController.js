@@ -58,6 +58,7 @@ const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+    // eslint-disable-next-line no-unused-vars
     const { password_hash, ...userWithoutPassword } = user;
     const token = generateToken(userWithoutPassword);
 
