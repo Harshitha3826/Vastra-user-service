@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(helmet());
-app.use(cors({ origin: ['http://localhost:3000', 'http://frontend:80', '*'] }));
+app.use(cors({ origin: ['http://localhost:3000', 'http://frontend:80'] }));
 app.use(express.json());
 app.use(morgan('dev'));
 
