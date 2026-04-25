@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const bcrypt = require('bcrypt');
+const argon2 = require('argon2');
 const authRoutes = require('../routes/authRoutes');
 
 // Mock the database
@@ -32,7 +32,7 @@ describe('Auth Controller', () => {
       const userData = {
         name: 'Test User',
         email: 'test@example.com',
-        password: 'password123'
+        password: 'Password123!'
       };
 
       const mockUser = {
@@ -63,7 +63,7 @@ describe('Auth Controller', () => {
         .send({
           name: 'Test User',
           email: 'invalid-email',
-          password: 'password123'
+          password: 'Password123!'
         })
         .expect(400);
 
@@ -80,7 +80,7 @@ describe('Auth Controller', () => {
         })
         .expect(400);
 
-      expect(response.body.error).toBe('Password must be at least 6 characters long');
+      expect(response.body.error).toBe('Password must be at least 8 characters long');
     });
 
     it('should return 409 for existing email', async () => {
@@ -91,7 +91,7 @@ describe('Auth Controller', () => {
         .send({
           name: 'Test User',
           email: 'test@example.com',
-          password: 'password123'
+          password: 'Password123!'
         })
         .expect(409);
 
@@ -103,14 +103,14 @@ describe('Auth Controller', () => {
     it('should login successfully', async () => {
       const loginData = {
         email: 'test@example.com',
-        password: 'password123'
+        password: 'Password123!'
       };
 
       const mockUser = {
         id: '123',
         name: 'Test User',
         email: loginData.email,
-        password_hash: await bcrypt.hash(loginData.password, 10),
+        password_hash: await argon2.hash(loginData.password),
         role: 'customer'
       };
 
