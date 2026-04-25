@@ -6,6 +6,14 @@ const morgan = require('morgan');
 const { initDb, pool } = require('./db');
 const authRoutes = require('./routes/authRoutes');
 
+// Validate required environment variables
+const requiredEnvVars = ['PORT', 'JWT_SECRET', 'USER_DB_HOST', 'USER_DB_PORT', 'USER_DB_NAME', 'USER_DB_USER', 'USER_DB_PASSWORD'];
+const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+
+if (missingEnvVars.length > 0) {
+  throw new Error(`Missing required environment variables: ${missingEnvVars.join(', ')}`);
+}
+
 const app = express();
 const PORT = process.env.PORT;
 

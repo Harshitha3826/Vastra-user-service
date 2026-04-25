@@ -1,10 +1,12 @@
 # Stage 1: Build phase
 FROM node:20-alpine AS builder
 WORKDIR /app
+
+# Install C++ build tools so native modules like argon2 can compile!
+RUN apk add --no-cache python3 make g++
+
 COPY package*.json ./
-RUN (npm ci --omit=dev || npm install --omit=dev) && \
-  npm cache clean --force && \
-  rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
+RUN npm ci --omit=dev
 
 # Stage 2: Run
 FROM node:20-alpine
