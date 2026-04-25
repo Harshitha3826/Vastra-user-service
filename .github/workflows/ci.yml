@@ -3,7 +3,7 @@ name: User Service CI
 on:
   push:
     branches:
-      - Prod-Branch
+      - main
       - Dev-Branch
     
   pull_request:
