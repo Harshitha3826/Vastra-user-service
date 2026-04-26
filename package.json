@@ -7,7 +7,17 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/__tests__/**"
+    ],
+    "coverageReporters": ["lcov", "text-summary"],
+    "coverageDirectory": "coverage"
   },
   "dependencies": {
     "argon2": "^0.44.0",
