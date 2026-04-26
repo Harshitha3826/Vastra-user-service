@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - main
-      - Dev-Branch
+      - Dev_branch
     
   pull_request:
     branches:
       - main
-      - Dev-Branch
+      - Dev_branch
     
 permissions:
   contents: write
@@ -28,6 +28,10 @@ jobs:
       sonar_project_key: "user-service"
       docker_context: "."
       dockerfile_path: "Dockerfile"
+      helm_repo: "Harshitha3826/Vastra-helm"
+      helm_chart_path: "vastra-deployments"
+      values_file: "values-dev.yaml"
+      helm_service_key: "Vastra-user-service"
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
